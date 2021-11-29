@@ -12,7 +12,7 @@ In this repository, you will find an example in periharels/modules below
 ✓ DHT11 Temperature and humidity sensor<br>
 
 The timebase frequency is calculated as follows:
-timebase frequency = TIM1 counter clock /((PSC + 1)*(ARR + 1)*(RCR + 1))
+timebase frequency = TIM6 counter clock /((PSC + 1)*(ARR + 1)*(RCR + 1))
 
 ## I2C (SSD1306 Screen) <br>
 
