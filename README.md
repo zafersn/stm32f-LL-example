@@ -1,6 +1,20 @@
 # stm32f072B-Disco-LL-example
 This example is based on the STM32f072B ST low level API. The peripheral initialization uses LL unitary service functions for optimization purposes (performance and size). 
 In this repository, you will find an example in periharels/modules below
+
+Table of contents
+=================
+
+<!--ts-->
+  * [st-ll-1](#st-ll-1)
+    *  I2C, TIM, GPIO(DHT11), UART examples.
+  * [st-ll-2](#st-ll-2)
+    *   PWM, GPIO-EXTI, I2C examples.
+  * [st-ll-3](#st-ll-3)
+    *   UART-HALF-DUPLEX  example
+<!--te-->
+
+
 # st-ll-1
 * Periharels <br>
   * ✓ 1- I2C (SSD1306 Screen) <br>
@@ -35,3 +49,12 @@ In this repository, you will find an example in periharels/modules below
 
 ## Pin Configuration <br>
 ![logo](https://github.com/zafersn/stm32f-LL-example/blob/main/072B-Disco/st-ll-2-pinout.PNG)
+
+# st-ll-3
+This example is one-board UART half-duplex(single-wire) communication using ST LL and HAL API on stm32f072-disco <br>
+*  PC4 - UART3 
+*  PA9 - UART1
+*  38400 B
+*  
+
+## Pin Configuration <br>
