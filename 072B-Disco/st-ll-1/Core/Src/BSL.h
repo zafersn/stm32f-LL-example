@@ -50,13 +50,13 @@
 #define LED1_ON() 						LL_GPIO_SetOutputPin(LE_DC6_GPIO_Port, LE_DC6_Pin) // Green ON
 #define LED1_TOGGLE() 					LL_GPIO_TogglePin(LE_DC6_GPIO_Port, LE_DC6_Pin) // Green TOGGLE
 
-#define LED2_OFF() 						LL_GPIO_ResetOutputPin(LE_DC7_GPIO_Port, LE_DC7_Pin) // Green off
-#define LED2_ON() 						LL_GPIO_SetOutputPin(LE_DC7_GPIO_Port, LE_DC7_Pin) // Green ON
-#define LED2_TOGGLE() 					LL_GPIO_TogglePin(LE_DC7_GPIO_Port, LE_DC7_Pin) // Green TOGGLE
+#define LED2_OFF() 						LL_GPIO_ResetOutputPin(LD4_GPIO_Port, LD4_Pin) // Green off
+#define LED2_ON() 						LL_GPIO_SetOutputPin(LD4_GPIO_Port, LD4_Pin) // Green ON
+#define LED2_TOGGLE() 					LL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin) // Green TOGGLE
 
-#define LED3_OFF() 						LL_GPIO_ResetOutputPin(LE_DC8_GPIO_Port, LE_DC8_Pin) // Green off
-#define LED3_ON() 						LL_GPIO_SetOutputPin(LE_DC8_GPIO_Port, LE_DC8_Pin) // Green ON
-#define LED3_TOGGLE() 					LL_GPIO_TogglePin(LE_DC8_GPIO_Port, LE_DC8_Pin) // Green TOGGLE
+#define LED3_OFF() 						LL_GPIO_ResetOutputPin(LD6_GPIO_Port, LD6_Pin) // Green off
+#define LED3_ON() 						LL_GPIO_SetOutputPin(LD6_GPIO_Port, LD6_Pin) // Green ON
+#define LED3_TOGGLE() 					LL_GPIO_TogglePin(LD6_GPIO_Port, LD6_Pin) // Green TOGGLE
 
 #define BTN_TOTAL_COUNT 2
 
@@ -150,6 +150,7 @@ void LED_Off(void);
 void LED_Blinking(uint32_t Period);
 void SPI_ReadData_MEMS();
 void Calgulate_FreqTim14();
+void USART_CharReception_Callback(void);
 
 static inline uint8_t I2C_Handle(uint8_t memAddr, uint8_t* pData, uint16_t size)
 {

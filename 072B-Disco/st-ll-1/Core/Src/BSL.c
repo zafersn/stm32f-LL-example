@@ -66,7 +66,6 @@ __IO uint8_t ubReceiveIndex      = 0;
 uint8_t 		SSD1306_Buffer[SSD1306_WIDTH * SSD1306_HEIGHT / 4];
 SSD1306_t SSD1306;
 double temperature = 0, humidity = 0;
-
 /* END Of Private variables ---------------------------------------------------------*/
 
 /* Private function prototypes -----------------------------------------------*/
@@ -94,6 +93,7 @@ void DHT11_Init();
 int ReadRawDHTData();
 int ReadDHT_Data();
 void Init_TIM6(void);
+void Init_UART1();
 
 
 /* END Of Private function prototypes -----------------------------------------------*/
@@ -112,6 +112,7 @@ void BSL_Startup()
 	IIC_Start();
 	Display_Init();
 	DHT11_Init();
+	Init_UART1();
 }
 
 /**
@@ -330,7 +331,7 @@ int ReadRawDHTData()
 		}
 	}
 	//********************************************************* Start reading data bit by low level (50us) ***************************
-	for (int i = 0; i < DHT_DATA_BYTE_COUNT; i++)
+	for (int i = 0; i < DHT_DATA_BYTE_COUNT ; i++)
 	{
 		for (int J = 7; J > -1; J--)
 		{
@@ -344,13 +345,56 @@ int ReadRawDHTData()
 			}
 
 			LL_TIM_SetCounter(TIM6, 0);
-			while(LL_GPIO_IsInputPinSet(DHT11_IN_GPIO_Port, DHT11_IN_Pin));
+			while(LL_GPIO_IsInputPinSet(DHT11_IN_GPIO_Port, DHT11_IN_Pin))
+			{
+				if(LL_TIM_GetCounter(TIM6) > DHT_BEGIN_RESPONSE_TIMEOUT_US)
+				{
+					return -2;
+				}
+			}
 			(LL_TIM_GetCounter(TIM6) > DHT_BIT_SET_DATA_DETECT_TIME_US) ? bitWrite(dht11_byte[i],J,1) : bitWrite(dht11_byte[i],J,0);
 		}
 	}
 
 	return 0;
 }
+
+void Init_UART1()
+{
+	/* Clear Overrun flag, in case characters have already been sent to USART */
+	  LL_USART_ClearFlag_ORE(USART1);
+	LL_USART_EnableIT_RXNE(USART1);
+	LL_USART_EnableIT_ERROR(USART1);
+}
+
+/**
+  * @brief  Function called from USART IRQ Handler when RXNE flag is set
+  *         Function is in charge of reading character received on USART RX line.
+  * @param  None
+  * @retval None
+  */
+void USART_CharReception_Callback(void)
+{
+__IO uint32_t received_char;
+
+  /* Read Received character. RXNE flag is cleared by reading of DR register */
+  received_char = LL_USART_ReceiveData8(USART1);
+
+  /* Check if received value is corresponding to specific one : S or s */
+  if ((received_char == 'S') || (received_char == 's'))
+  {
+    /* Turn LED2 On : Expected character has been received */
+	  LED3_TOGGLE();
+  }
+
+  /* Echo received character on TX */
+  for(int i = 0; i < DHT_DATA_BYTE_COUNT; i++)
+  {
+	  LL_USART_TransmitData8(USART1, dht11_byte[i]);
+	  while(!LL_USART_IsActiveFlag_TC(USART1));
+  }
+}
+
 
 void DelayUs(uint32_t us)
 {

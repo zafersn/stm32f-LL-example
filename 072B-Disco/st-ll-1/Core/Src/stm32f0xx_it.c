@@ -142,6 +142,28 @@ void SysTick_Handler(void)
 /* please refer to the startup file (startup_stm32f0xx.s).                    */
 /******************************************************************************/
 
+/**
+  * @brief This function handles USART1 global interrupt / USART1 wake-up interrupt through EXTI line 25.
+  */
+void USART1_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART1_IRQn 0 */
+	 /* Check RXNE flag value in SR register */
+	  if(LL_USART_IsActiveFlag_RXNE(USART1) )
+	  {
+		  if(LL_USART_IsEnabledIT_RXNE(USART1))
+		  {
+	    /* RXNE flag will be cleared by reading of DR register (done in call) */
+	    /* Call function in charge of handling Character reception */
+			  	  USART_CharReception_Callback();
+		  }
+	  }
+  /* USER CODE END USART1_IRQn 0 */
+  /* USER CODE BEGIN USART1_IRQn 1 */
+
+  /* USER CODE END USART1_IRQn 1 */
+}
+
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */

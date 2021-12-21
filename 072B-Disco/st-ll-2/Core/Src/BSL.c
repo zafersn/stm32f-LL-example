@@ -81,7 +81,7 @@ void IIC_Start(void);
 static uint8_t ssd1306_WriteCommand(uint8_t command);
 static uint8_t I2C_Handle(uint8_t memAddr, uint8_t* pData,uint16_t size);
 
-static void LED_TEST();
+
 void ssd1306_UpdateScreen();
 void ssd1306_Fill(SSD1306_COLOR color);
 void Display_Init();
