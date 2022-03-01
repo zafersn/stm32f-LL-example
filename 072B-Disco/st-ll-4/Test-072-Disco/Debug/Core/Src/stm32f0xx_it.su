@@ -1,0 +1,15 @@
+stm32f0xx_ll_adc.h:3053:26:LL_ADC_IsActiveFlag_OVR	16	static
+stm32f0xx_ll_adc.h:3122:22:LL_ADC_ClearFlag_OVR	16	static
+stm32f0xx_ll_dma.h:1428:26:LL_DMA_IsActiveFlag_TC1	16	static
+stm32f0xx_ll_dma.h:1509:26:LL_DMA_IsActiveFlag_HT1	16	static
+stm32f0xx_ll_dma.h:1590:26:LL_DMA_IsActiveFlag_TE1	16	static
+stm32f0xx_ll_dma.h:1780:22:LL_DMA_ClearFlag_TC1	16	static
+stm32f0xx_ll_dma.h:1861:22:LL_DMA_ClearFlag_HT1	16	static
+stm32f0xx_ll_dma.h:1942:22:LL_DMA_ClearFlag_TE1	16	static
+stm32f0xx_it.c:69:6:NMI_Handler	8	static
+stm32f0xx_it.c:84:6:HardFault_Handler	8	static
+stm32f0xx_it.c:99:6:SVC_Handler	8	static
+stm32f0xx_it.c:112:6:PendSV_Handler	8	static
+stm32f0xx_it.c:125:6:SysTick_Handler	8	static
+stm32f0xx_it.c:146:6:DMA1_Channel1_IRQHandler	8	static
+stm32f0xx_it.c:202:6:ADC1_COMP_IRQHandler	8	static
